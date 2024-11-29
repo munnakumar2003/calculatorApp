@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(45deg, #e0eafc, #cfdef3);
+    font-family: 'Arial', sans-serif;
+}
+
+.calculator {
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.display {
+    background: #333;
+    color: #fff;
+    font-size: 2em;
+    text-align: right;
+    padding: 20px;
+}
+
+.display input {
+    width: 100%;
+    border: none;
+    background: none;
+    color: inherit;
+    text-align: right;
+    font-size: 1em;
+    outline: none;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.btn {
+    border: 1px solid #ddd;
+    padding: 20px;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+
+.btn:hover {
+    background: #f0f0f0;
+}
+
+.btn:active {
+    background: #ddd;
+}
+
+.btn:nth-child(4n+1) {
+    background: #ff7473;
+    color: #fff;
+}
+
+.btn:nth-child(4n+2),
+.btn:nth-child(4n+3),
+.btn:nth-child(4n+4) {
+    background: #ffc952;
+    color: #fff;
+}
+
+.btn:nth-child(4n) {
+    background: #47b8e0;
+    color: #fff;
+}
+
+.btn:last-child {
+    grid-column: span 2;
+    background: #343d46;
+    color: #fff;
+}
+
+@media (max-width: 500px) {
+    .btn {
+        font-size: 1.2em;
+        padding: 15px;
+    }
+
+    .display {
+        font-size: 1.5em;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <input type="text" id="result" disabled>
+        </div>
+        <div class="buttons">
+            <button class="btn" onclick="clearDisplay()">C</button>
+            <button class="btn" onclick="appendValue('/')">/</button>
+            <button class="btn" onclick="appendValue('*')">*</button>
+            <button class="btn" onclick="deleteLast()">DEL</button>
+            <button class="btn" onclick="appendValue('7')">7</button>
+            <button class="btn" onclick="appendValue('8')">8</button>
+            <button class="btn" onclick="appendValue('9')">9</button>
+            <button class="btn" onclick="appendValue('-')">-</button>
+            <button class="btn" onclick="appendValue('4')">4</button>
+            <button class="btn" onclick="appendValue('5')">5</button>
+            <button class="btn" onclick="appendValue('6')">6</button>
+            <button class="btn" onclick="appendValue('+')">+</button>
+            <button class="btn" onclick="appendValue('1')">1</button>
+            <button class="btn" onclick="appendValue('2')">2</button>
+            <button class="btn" onclick="appendValue('3')">3</button>
+            <button class="btn" onclick="calculate()">=</button>
+            <button class="btn" onclick="appendValue('0')" style="grid-column: span 2;">0</button>
+            <button class="btn" onclick="appendValue('.')">.</button>
+        </div>
+    </div>
+    <script>
+        let display = document.getElementById('result');
+
+function appendValue(value) {
+    display.value += value;
+}
+
+function clearDisplay() {
+    display.value = '';
+}
+
+function deleteLast() {
+    display.value = display.value.slice(0, -1);
+}
+
+function calculate() {
+    try {
+        display.value = eval(display.value);
+    } catch (e) {
+        display.value = 'Error';
+    }
+}
+
+    </script>
+</body>
+</html>
